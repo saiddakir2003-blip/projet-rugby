@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rugby U15</title>
+  <style>
+    :root{--bg:#f4f7f6;--card:#fff;--text:#17211d;--muted:#66756f;--primary:#0f6b45;--dark:#08452d;--accent:#e7f3ed;--line:#d9e4df;--danger:#b42318;--warning:#b7791f;--shadow:0 10px 30px rgba(0,0,0,.08)}
+    *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}header{background:linear-gradient(135deg,var(--dark),var(--primary));color:#fff;padding:28px 18px;text-align:center}header h1{margin:0 0 8px;font-size:clamp(24px,4vw,40px)}header p{margin:0 auto;max-width:1100px;color:#e8fff4;font-size:15px}.container{max-width:1240px;margin:24px auto 60px;padding:0 16px}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.tab-btn{background:#fff;color:var(--dark);border:1px solid var(--line);box-shadow:var(--shadow)}.tab-btn.active{background:var(--primary);color:#fff}.tab{display:none}.tab.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:18px}.span-12{grid-column:span 12}.span-8{grid-column:span 8}.span-6{grid-column:span 6}.span-4{grid-column:span 4}@media(max-width:880px){.span-8,.span-6,.span-4{grid-column:span 12}}h2{margin:0 0 12px;font-size:22px;color:var(--dark)}h3{margin:18px 0 10px;font-size:17px}.small{font-size:13px;color:var(--muted)}label{display:block;margin:10px 0 6px;font-weight:700;font-size:14px}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;background:#fff}textarea{min-height:90px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:620px){.row{grid-template-columns:1fr}}button{border:0;border-radius:12px;padding:10px 13px;cursor:pointer;font-weight:800;font-size:14px;transition:.1s}button:hover{transform:translateY(-1px)}.btn-primary{background:var(--primary);color:#fff}.btn-light{background:var(--accent);color:var(--dark)}.btn-danger{background:#fee2e2;color:var(--danger)}.btn-warning{background:#fff4d6;color:var(--warning)}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.counter-row{display:grid;grid-template-columns:1fr auto auto auto;align-items:center;gap:8px;padding:10px 0;border-bottom:1px dashed var(--line)}.counter-value{min-width:46px;text-align:center;font-weight:800;color:var(--dark);background:var(--accent);padding:7px 10px;border-radius:10px}.score-card{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:#fbfdfc}.score-title{font-weight:800}.score-value{font-size:22px;font-weight:900;color:var(--primary)}.bar{grid-column:1/-1;height:10px;background:#e8eeeb;border-radius:999px;overflow:hidden}.bar span{display:block;height:100%;background:var(--primary);transition:.3s}.profile-box{border:2px solid var(--primary);background:var(--accent);border-radius:18px;padding:16px;margin-bottom:12px}.profile-box strong{display:block;font-size:20px;margin-bottom:5px;color:var(--dark)}.badge{display:inline-flex;padding:6px 10px;border-radius:999px;background:var(--accent);color:var(--dark);font-weight:800;font-size:13px;margin:4px 6px 4px 0}.decision,.exercise{padding:14px;border-radius:14px;margin:10px 0;background:#fff;border:1px solid var(--line)}.decision{border-left:5px solid var(--primary);background:#f8faf9}.exercise-title{font-weight:900;color:var(--dark);margin-bottom:6px}.warning-box{background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12;padding:12px;border-radius:14px;margin-top:10px}.video-box{margin-top:14px;padding:12px;border-radius:14px;background:#f8faf9;border:1px solid var(--line)}.video-box h4{margin:0 0 10px;color:var(--dark);font-size:16px}.video-box video{width:100%;max-height:360px;border-radius:12px;background:#000}.video-note{font-size:12px;color:var(--muted);margin-top:6px}
+.individual-detail{margin-top:12px;padding:12px;border-radius:14px;background:#fff;border:1px solid var(--line)}
+.individual-detail h4{margin:0 0 8px;color:var(--dark);font-size:16px}
+.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.detail-box{background:#fbfdfc;border:1px solid var(--line);border-radius:12px;padding:10px}
+.detail-box strong{display:block;color:var(--dark);margin-bottom:4px}
+.detail-list{margin:6px 0 0 18px;padding:0}
+.detail-list li{margin:4px 0}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.level-card{border:1px dashed var(--line);border-radius:12px;padding:9px;background:#fff}
+.source-badge{display:inline-block;margin-top:8px;padding:5px 9px;border-radius:999px;background:var(--accent);color:var(--dark);font-weight:800;font-size:12px}
+@media(max-width:780px){.detail-grid,.levels{grid-template-columns:1fr}}
+.training-details{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}.detail-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}.detail-card h4{margin:0 0 6px;color:var(--dark);font-size:15px}.detail-card ul{margin:0;padding-left:18px}.detail-card li{font-size:13px;margin:4px 0}.security-box{background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:10px;margin-top:10px;color:#7c2d12}@media(max-width:760px){.training-details{grid-template-columns:1fr}}table{width:100%;border-collapse:collapse;margin-top:10px;border-radius:14px;overflow:hidden}th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px;font-size:14px;vertical-align:top}th{background:var(--accent);color:var(--dark)}#sheetPreview{width:100%;max-height:720px;object-fit:contain;border:1px solid var(--line);border-radius:16px;background:#fff;margin-top:12px}.download-card{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}.download-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:12px;padding:10px 13px;font-weight:800;font-size:14px;background:var(--primary);color:#fff}.download-link.light{background:var(--accent);color:var(--dark)}.steps{counter-reset:step}.step{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fbfdfc;margin:10px 0}.step:before{counter-increment:step;content:counter(step);display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--primary);color:#fff;font-weight:900}.guide-note{background:#f8faf9;border-left:5px solid var(--primary);padding:14px;border-radius:14px;margin-top:12px}.footer-note{text-align:center;color:var(--muted);margin-top:30px;font-size:13px}@media print{header,.tabs,.actions,button{display:none!important}body{background:#fff}.card{box-shadow:none;break-inside:avoid}.container{margin:0;max-width:none}.tab{display:block}}
+  </style>
+</head>
+<body>
+<header>
+  <h1>Rugby U15</h1>
+</header>
+
+<main class="container">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('guide',this)">Mode d’emploi</button>
+    <button class="tab-btn" onclick="showTab('individual',this)">Aspect individuel</button>
+    <button class="tab-btn" onclick="showTab('team',this)">Aspect collectif équipe</button>
+    <button class="tab-btn" onclick="showTab('library',this)">Référentiel exercices</button>
+  </div>
+
+  <section id="guide" class="tab active">
+    <section class="grid">
+      <div class="card span-12">
+        <h2>Mode d’emploi de l’application Rugby U15</h2>
+        <p>Cette application permet d’analyser le profil physique des joueurs U15 à partir d’une fiche d’observation terrain, puis de proposer des axes d’entraînement individuels et collectifs détaillés : organisation, consignes, critères de réussite, variables N1/N2/N3, sécurité et vidéos.</p>
+        <div class="download-card">
+          <a class="download-link" href="downloads/fiche_observation_rugby_u15.pdf" download>Télécharger la fiche d’observation</a>
+          <a class="download-link light" href="downloads/fiche_observation_rugby_u15.jpeg" download>Télécharger la fiche en image</a>
+          <a class="download-link light" href="downloads/modele_csv_observation_rugby_u15.csv" download>Télécharger le modèle CSV</a>
+        </div>
+      </div>
+
+      <div class="card span-8">
+        <h2>Étapes d’utilisation</h2>
+        <div class="steps">
+          <div class="step"><div><strong>Télécharger la fiche d’observation.</strong><br><span class="small">La fiche est prête à imprimer ou à utiliser pendant le match.</span></div></div>
+          <div class="step"><div><strong>Remplir la fiche d’observation pendant le match.</strong><br><span class="small">Observer un joueur à la fois : courses, intensité, sprints, replacement défensif, contact et évolution dans le match.</span></div></div>
+          <div class="step"><div><strong>Reporter les données dans le fichier CSV.</strong><br><span class="small">Utiliser le modèle CSV fourni pour garder le même ordre des colonnes.</span></div></div>
+          <div class="step"><div><strong>Importer le CSV dans l’application.</strong><br><span class="small">Dans l’onglet Aspect individuel, importer le fichier CSV ou coller son contenu dans la zone texte.</span></div></div>
+          <div class="step"><div><strong>Analyser le joueur.</strong><br><span class="small">L’application calcule les indices et propose un profil physique du joueur.</span></div></div>
+          <div class="step"><div><strong>Ajouter le joueur à l’équipe.</strong><br><span class="small">Répéter l’opération pour plusieurs joueurs afin de construire l’analyse collective.</span></div></div>
+          <div class="step"><div><strong>Analyser l’équipe.</strong><br><span class="small">L’application calcule le profil collectif et identifie les priorités d’entraînement.</span></div></div>
+          <div class="step"><div><strong>Consulter les exercices et vidéos.</strong><br><span class="small">Les situations d’entraînement collectif et les vidéos démonstratives apparaissent dans la décision d’entraînement collective.</span></div></div>
+        </div>
+      </div>
+
+      <aside class="card span-4">
+        <h2>Conseils d’utilisation</h2>
+        <div class="guide-note">
+          <p><strong>Conseil 1 :</strong> remplir d’abord la fiche d’observation terrain pour un seul joueur pendant une séquence de match.</p>
+          <p><strong>Conseil 2 :</strong> vérifier les données avant l’importation CSV.</p>
+          <p><strong>Conseil 3 :</strong> ajouter plusieurs joueurs pour obtenir une analyse collective fiable.</p>
+          <p><strong>Conseil 4 :</strong> utiliser les vidéos pour expliquer les situations aux élèves.</p>
+        </div>
+      </aside>
+    </section>
+  </section>
+
+  <section id="individual" class="tab">
+    <section class="grid">
+      <div class="card span-12">
+        <h2>1. Identification du joueur</h2>
+        <div class="row">
+          <div><label>Nom du joueur</label><input id="playerName" placeholder="Ex : Youssef"></div>
+          <div><label>Classe / groupe</label><input id="className" placeholder="Ex : 2AC / U15"></div>
+        </div>
+        <div class="row">
+          <div><label>Match observé</label><input id="matchName" placeholder="Ex : Match 5c5 — terrain 1"></div>
+          <div><label>Durée observée</label><input id="duration" placeholder="Ex : 8 minutes"></div>
+        </div>
+      </div>
+
+      <div class="card span-12">
+        <h2>2. Importation de la fiche d’observation</h2>
+        <p class="small">Méthode retenue pour cette étape : importer uniquement un fichier CSV préparé selon le modèle de la fiche d’observation. Les valeurs du CSV sont automatiquement reportées dans la grille numérique individuelle.</p>
+        <div class="row">
+          <div><label>Importer CSV</label><input id="csvImport" type="file" accept=".csv,text/csv" onchange="importCSVToGrid(event)"></div>
+          <div><label>Coller le CSV en texte</label><textarea id="csvTextInput" placeholder="Collez ici le contenu CSV si le fichier ne se lit pas automatiquement"></textarea></div>
+          <div><label>Modèle CSV attendu</label><textarea readonly>nom_joueur,match,classe,duree_observee,nombre_total_courses,courses_utiles,marche,trot,course_rapide,sprint,sprints_utiles,sprints_inutiles,retour_rapide,retour_moyen,retour_lent,nombre_contacts,contacts_gagnes,contacts_subis,intensite_debut,intensite_fin,chute_performance,commentaire_coach</textarea></div>
+        </div>
+        <div class="actions">
+          <button class="btn-primary" onclick="reportCSVTextToGrid()">Reporter dans la grille</button>
+          <button class="btn-light" onclick="downloadCSVTemplate()">Télécharger modèle CSV</button>
+        </div>
+      </div>
+
+      <div class="card span-8">
+        <h2>3. Grille d’observation individuelle numérique</h2>
+        <p class="small">Les compteurs correspondent au modèle : activité, intensité, sprint utile, replacement, contact et évolution dans le match.</p>
+        <div id="counters"></div>
+        <h3>Évolution dans le match</h3>
+        <div class="row">
+          <div><label>Intensité début match</label><select id="startIntensity"><option value="forte">Forte</option><option value="moyenne" selected>Moyenne</option><option value="faible">Faible</option></select></div>
+          <div><label>Intensité fin match</label><select id="endIntensity"><option value="forte">Forte</option><option value="moyenne" selected>Moyenne</option><option value="faible">Faible</option></select></div>
+        </div>
+        <label>Commentaire du coach</label><textarea id="coachComment" placeholder="Ex : joueur actif mais courses parfois inutiles..."></textarea>
+        <div class="actions">
+          <button class="btn-primary" onclick="analysePlayer()">Analyser le joueur</button>
+          <button class="btn-light" onclick="addCurrentPlayerToTeam()">Ajouter ce joueur à l’équipe</button>
+          <button class="btn-light" onclick="savePlayer()">Sauvegarder joueur</button>
+          <button class="btn-warning" onclick="loadLast()">Charger dernier joueur</button>
+          <button class="btn-danger" onclick="resetAll()">Réinitialiser</button>
+        </div>
+      </div>
+
+      <aside class="card span-4"><h2>4. Résultats individuels</h2><div id="scores"></div><div id="profile"></div></aside>
+      <div class="card span-12"><h2>5. Décision d’entraînement individuelle</h2><div id="decisions"><p class="small">Cliquez sur analyser pour générer les axes et exercices PPI.</p></div></div>
+      <div class="card span-12"><h2>6. Export fiche joueur</h2><div class="actions"><button class="btn-primary" onclick="generateReport()">Générer fiche synthèse</button><button class="btn-light" onclick="window.print()">Imprimer / PDF</button></div><textarea id="report" placeholder="Fiche synthèse"></textarea></div>
+    </section>
+  </section>
+
+  <section id="team" class="tab">
+    <section class="grid">
+      <div class="card span-12"><h2>1. Identification équipe / classe</h2><div class="row"><div><label>Nom équipe / classe</label><input id="teamName" placeholder="Ex : 2AC Rugby"></div><div><label>Match / séance</label><input id="teamMatch" placeholder="Ex : Tournoi 5c5"></div></div><div class="actions"><button class="btn-primary" onclick="analyseTeam()">Analyser l’équipe</button><button class="btn-light" onclick="generateTeamReport()">Générer bilan collectif</button><button class="btn-warning" onclick="loadTeam()">Charger équipe</button><button class="btn-danger" onclick="clearTeam()">Vider équipe</button></div></div>
+      <div class="card span-8"><h2>2. Liste des joueurs observés</h2><p class="small">Aspect collectif de l’équipe : cette partie contient uniquement les joueurs ajoutés depuis l’onglet individuel. Chaque joueur garde son profil individuel, puis l’application calcule le profil collectif de l’équipe.</p><div id="teamTable"></div></div>
+      <aside class="card span-4"><h2>3. Profil collectif</h2><div id="teamScores"></div><div id="teamProfile"></div></aside>
+      <div class="card span-12"><h2>4. Décision d’entraînement collective</h2><div id="teamDecisions"><p class="small">Cliquez sur analyser l’équipe.</p></div></div>
+      <div class="card span-12"><h2>5. Organisation du cycle collectif</h2><div id="teamCycle"></div></div>
+      <div class="card span-12"><h2>6. Export bilan collectif</h2><textarea id="teamReport" placeholder="Bilan collectif"></textarea></div>
+    </section>
+  </section>
+
+  <section id="library" class="tab"><section class="grid"><div class="card span-12"><h2>Référentiel exercices + PPI</h2><p class="small">Ressources mobilisées : TECH XV, Rugby vitesse, World Rugby Activate U15, Rugby Ready, DTN Rugby, préparation physique école de rugby.</p><div id="exerciseLibrary"></div></div></section></section>
+  <p class="footer-note">Rugby U15 — version individuelle + collective + import CSV + entraînement détaillé + vidéos.</p>
+</main>
+
+<script>
+const state={totalRuns:0,usefulRuns:0,walk:0,trot:0,fastRun:0,sprint:0,usefulSprint:0,uselessSprint:0,rapidReturn:0,mediumReturn:0,slowReturn:0,contacts:0,contactsWon:0,contactsLost:0,supportRuns:0,inactivity:0};
+let teamPlayers=[];
+const labels={totalRuns:'Courses totales',usefulRuns:'Courses utiles soutien / défense',walk:'Marche',trot:'Trot',fastRun:'Course rapide',sprint:'Sprint',usefulSprint:'Sprint utile',uselessSprint:'Sprint inutile',rapidReturn:'Replacement rapide',mediumReturn:'Replacement moyen',slowReturn:'Replacement lent',contacts:'Contacts totaux',contactsWon:'Contacts gagnés',contactsLost:'Contacts subis',supportRuns:'Courses de soutien sans ballon',inactivity:'Temps d’inactivité > 5 s'};
+const exercises={
+activity:{
+ title:'Axe activité / volume de course',
+ objective:'Augmenter la participation utile sans ballon et améliorer la disponibilité autour du porteur.',
+ source:'FFR École de Rugby + World Rugby Rugby Ready',
+ video:'videos/collectif_activite.mp4',
+ organisation:['Espace : 25 m × 20 m','Joueurs : 4 contre 4 ou 5 contre 5','Matériel : ballons, chasubles, 8 plots','Durée : 2 blocs de 6 minutes','Récupération : 1 minute entre les blocs'],
+ consignes:['Le porteur doit toujours avoir au moins un soutien proche.','Après chaque passe, le joueur se replace dans un espace libre.','Le soutien doit communiquer clairement : “je suis là”, “à droite”, “à gauche”.','Interdiction de rester immobile plus de 3 secondes.'],
+ criteres:['Le joueur propose une solution de passe rapidement.','Le porteur n’est jamais isolé.','Les courses créent un avantage ou sécurisent le ballon.','Le groupe conserve le ballon sur plusieurs temps de jeu.'],
+ variables:['N1 : terrain réduit, opposition modérée, consigne simple de soutien proche.','N2 : terrain moyen, obligation de se replacer après chaque passe.','N3 : terrain plus large, continuité rapide et prise d’information avant de courir.'],
+ securite:'Insister sur l’échauffement progressif, les appuis contrôlés et la règle de non-contact violent.',
+ items:[
+  ['Jeu continu 4c4 + soutien obligatoire','Le porteur doit toujours avoir un soutien proche.','20 s course multidirectionnelle + 20 s gainage + 20 s repos.','2 blocs de 6 min.'],
+  ['Relais ballon vivant','Après chaque passe, se replacer dans un espace libre.','Montées de genoux + appuis rapides + fentes.','10 à 12 min.']
+ ]
+},
+speed:{
+ title:'Axe vitesse / sprint utile',
+ objective:'Développer les accélérations utiles : franchir, soutenir, défendre ou se replacer.',
+ source:'TECH XV Rugby vitesse + Rugby Coach Weekly U15',
+ video:'videos/collectif_vitesse.mp4',
+ organisation:['Espace : couloir de 20 m × 12 m','Joueurs : groupes de 3 à 5 joueurs','Matériel : plots, ballons, chasubles','Durée : 4 séries de 3 passages','Récupération : 45 s à 1 min entre passages'],
+ consignes:['Ne sprinter que si le sprint crée un avantage.','Prendre l’information avant l’accélération.','Freiner après le sprint sans se déséquilibrer.','Le défenseur doit revenir vite sans pousser ni charger.'],
+ criteres:['Le sprint permet de franchir, soutenir ou défendre.','Le joueur ne gaspille pas ses accélérations.','Le départ est explosif mais contrôlé.','La fin de course reste équilibrée.'],
+ variables:['N1 : départ au signal, distance courte 5 à 8 m.','N2 : départ sur lecture du défenseur, distance 10 à 15 m.','N3 : situation 2c1 ou 3c2 avec choix : passer, fixer ou accélérer.'],
+ securite:'Éviter les départs trop rapprochés. Prévoir un espace de freinage et limiter le nombre de sprints successifs.',
+ items:[
+  ['3 contre 2 en couloir','Choisir le bon moment pour accélérer, fixer ou transmettre.','Départs explosifs 5 m + freinage contrôlé.','4 séries de 3 passages.'],
+  ['Poursuite défensive','Un défenseur part en retard et doit rattraper l’attaquant.','Appuis latéraux + cloche-pied + accélération 10 m.','8 à 10 passages.']
+ ]
+},
+defense:{
+ title:'Axe replacement défensif / transition',
+ objective:'Réagir rapidement après perte de balle et reconstruire une ligne défensive efficace.',
+ source:'Rugby Toolbox Defence Drills + FFR École de Rugby',
+ video:'videos/collectif_defense.mp4',
+ organisation:['Espace : 25 m × 18 m','Joueurs : 5 contre 5','Matériel : ballons, plots, chasubles de deux couleurs','Durée : 3 blocs de 4 minutes','Récupération : 1 minute entre les blocs'],
+ consignes:['Au signal ou à la perte de balle, l’équipe attaquante devient défenseur.','Tous les défenseurs doivent revenir derrière la ligne du ballon.','Monter ensemble, communiquer et fermer les intervalles.','Ne pas défendre seul : rester aligné avec les partenaires.'],
+ criteres:['Retour défensif rapide après perte de balle.','Ligne défensive alignée.','Communication audible entre joueurs.','Réduction des franchissements adverses.'],
+ variables:['N1 : terrain réduit, défense semi-active, objectif = revenir derrière le ballon.','N2 : défense active, obligation de communiquer et de monter ensemble.','N3 : transition rapide après perte, terrain plus large, pression défensive réelle.'],
+ securite:'Rappeler la posture défensive basse, distance de sécurité et interdiction des contacts dangereux.',
+ items:[
+  ['Perte de balle → retour défensif','L’équipe qui attaque devient défenseur au signal.','Sprint 8 m + changement direction + posture basse.','3 blocs de 4 min.'],
+  ['Montée défensive en ligne','Monter ensemble, communiquer et fermer les espaces.','Gainage latéral 15 s + appuis réactifs.','12 min.']
+ ]
+},
+contact:{
+ title:'Axe contact / engagement contrôlé',
+ objective:'Améliorer la stabilité, la confiance et la sécurité dans les duels contrôlés.',
+ source:'World Rugby Activate U15 + Rugby Ready + Breakdown Ready',
+ video:'videos/collectif_contact.mp4',
+ organisation:['Espace : zone de duel 8 m × 8 m','Joueurs : binômes ou groupes de 4','Matériel : tapis si disponible, plots, ballons','Durée : 6 duels de 8 à 10 s','Récupération : 30 à 45 s entre duels'],
+ consignes:['Opposition contrôlée : pousser, résister, conserver son équilibre.','Dos gainé, tête placée en sécurité, appuis écartés.','Interdiction de projeter ou de charger violemment.','Arrêt immédiat au signal du professeur.'],
+ criteres:['Le joueur garde une posture stable.','Le contact est contrôlé et sécurisé.','Le joueur avance ou résiste sans se désorganiser.','Le ballon est conservé ou libéré proprement vers le soutien.'],
+ variables:['N1 : lutte sans ballon, intensité faible, priorité à la posture.','N2 : contact avec ballon, opposition modérée, libération vers soutien.','N3 : contact + replacement + continuité collective après duel.'],
+ securite:'Axe prioritaire : progressivité, gainage, consignes de sécurité, pas de placage complet sans maîtrise technique.',
+ items:[
+  ['Lutte contrôlée épaule contre épaule','Pousser dans une zone courte sans projection.','Gainage frontal + pont latéral + squat contrôlé.','6 duels de 8 à 10 s.'],
+  ['Contact + conservation','Avancer au contact contrôlé puis libérer au soutien.','YWTL + gainage dynamique + fentes avant.','3 séries de 5 passages.']
+ ]
+},
+endurance:{
+ title:'Axe endurance spécifique / répétition',
+ objective:'Maintenir l’intensité du début à la fin du match grâce à des efforts répétés proches du rugby.',
+ source:'World Rugby Rugby Ready + préparation physique jeunes',
+ video:'videos/collectif_endurance.mp4',
+ organisation:['Espace : demi-terrain ou zone 30 m × 20 m','Joueurs : groupes de 5 à 8 joueurs','Matériel : plots, ballons, chasubles','Durée : 2 blocs de 6 minutes','Récupération : 2 minutes entre blocs'],
+ consignes:['Alterner action intense et récupération active.','Garder une qualité technique malgré la fatigue.','Après un sprint, revenir se replacer puis repartir en soutien.','Hydratation et récupération surveillées.'],
+ criteres:['L’intensité reste stable sur toute la séquence.','Le joueur se replace même en fatigue.','La qualité des passes et des courses reste correcte.','Le groupe termine sans désorganisation majeure.'],
+ variables:['N1 : 10 s effort / 20 s récupération, espace réduit.','N2 : 15 s effort / 15 s récupération, ballon vivant.','N3 : enchaînement sprint → replacement → soutien avec opposition.'],
+ securite:'Adapter les durées à l’âge U15. Arrêter en cas de fatigue excessive et prévoir hydratation.',
+ items:[
+  ['Intermittent rugby 15/15 avec ballon','15 s d’action intense puis 15 s récupération active.','Course modérée + gainage 20 s.','2 blocs de 6 min.'],
+  ['Sprint → replacement → soutien','Sprinter, revenir défendre, repartir en soutien.','Respiration contrôlée + mobilité hanches/chevilles.','6 à 8 répétitions.']
+ ]
+},
+reading:{
+ title:'Axe lecture du jeu / économie d’effort',
+ objective:'Réduire les courses inutiles et améliorer la prise d’information avant l’action.',
+ source:'TECH XV + Sportplan Defensive Patterns + didactique sports collectifs',
+ video:'videos/collectif_lecture.mp4',
+ organisation:['Espace : 20 m × 15 m','Joueurs : 2c1, 3c2 puis 4c3','Matériel : plots, ballons, chasubles','Durée : 15 minutes','Récupération : retour en marchant avec question rapide'],
+ consignes:['Avant de courir, regarder : ballon, partenaire, adversaire, espace libre.','Choisir : fixer, passer, soutenir ou accélérer.','Après chaque action, verbaliser le choix réalisé.','Limiter les courses inutiles sans ballon.'],
+ criteres:['Le joueur prend l’information avant l’action.','La course répond à une intention claire.','Le choix permet de conserver ou avancer.','Le joueur communique avec ses partenaires.'],
+ variables:['N1 : arrêt sur image et choix guidé par le professeur.','N2 : 2c1 puis 3c2 avec défense semi-active.','N3 : continuité rapide, défense active, choix autonome sous pression.'],
+ securite:'Limiter la vitesse au départ, privilégier la décision et éviter les contacts non maîtrisés.',
+ items:[
+  ['Stop image — choix de course','Arrêter l’action : où courir ? pourquoi ?','Appuis légers + posture prête.','10 situations courtes.'],
+  ['2c1 puis 3c2 décisionnel','Fixer, passer ou accélérer selon défenseur.','Réactivité sonore/visuelle + départs courts.','15 min.']
+ ]
+}
+};
+function showTab(id,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');if(id==='team')renderTeamTable()}
+function renderCounters(){const c=document.getElementById('counters');c.innerHTML='';Object.keys(labels).forEach(k=>{c.innerHTML+=`<div class="counter-row"><div><strong>${labels[k]}</strong></div><button class="btn-danger" onclick="changeCounter('${k}',-1)">−</button><div class="counter-value" id="value-${k}">${state[k]}</div><button class="btn-light" onclick="changeCounter('${k}',1)">+</button></div>`})}
+function changeCounter(k,d){state[k]=Math.max(0,state[k]+d);document.getElementById('value-'+k).textContent=state[k];analysePlayer(false)}
+function pct(v,t){return(!t||t<=0)?0:Math.round(v/t*100)}function avg(a){return a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length):0}
+function detectFatigue(){const r={faible:1,moyenne:2,forte:3};return r[endIntensity.value]<r[startIntensity.value]}
+function calculateIndices(raw=state){const tm=raw.walk+raw.trot+raw.fastRun+raw.sprint,tr=raw.rapidReturn+raw.mediumReturn+raw.slowReturn;return{activity:pct(raw.usefulRuns,raw.totalRuns),intensity:pct(raw.fastRun+raw.sprint,tm),sprintUtility:pct(raw.usefulSprint,raw.usefulSprint+raw.uselessSprint),defense:pct(raw.rapidReturn,tr),contact:pct(raw.contactsWon,raw.contacts),fatigue:detectFatigue()}}
+function levelLabel(s){return s>=70?'Bon':s>=40?'Moyen':'À développer'}
+function getProfile(i,raw=state){const active=raw.totalRuns>=8||raw.supportRuns>=4,eff=i.activity>=50&&i.sprintUtility>=50;if(active&&eff)return{name:'Actif et efficace',desc:'Participation régulière et actions utiles.'};if(active&&!eff)return{name:'Actif mais inefficace',desc:'Beaucoup d’énergie mais peu d’avantage créé.'};if(!active&&eff)return{name:'Peu actif mais efficace',desc:'Actions pertinentes mais volume faible.'};return{name:'Peu actif et en difficulté',desc:'Manque d’activité, d’intensité ou d’engagement.'}}
+function getPriorities(i,raw=state){let p=[];if(i.activity<45)p.push('activity');if(i.intensity<45||raw.sprint<3)p.push('speed');if(i.sprintUtility<50&&(raw.usefulSprint+raw.uselessSprint)>0)p.push('reading');if(i.defense<45&&(raw.rapidReturn+raw.mediumReturn+raw.slowReturn)>0)p.push('defense');if(i.contact<45&&raw.contacts>0)p.push('contact');if(i.fatigue)p.push('endurance');if(raw.inactivity>=4)p.push('activity');p=[...new Set(p)];return p.length?p.slice(0,3):['reading','speed','activity']}
+function renderScores(i){scores.innerHTML=[['Activité utile',i.activity],['Intensité',i.intensity],['Sprint utile',i.sprintUtility],['Replacement',i.defense],['Contact',i.contact]].map(([n,v])=>`<div class="score-card"><div class="score-title">${n}<br><span class="small">${levelLabel(v)}</span></div><div class="score-value">${v}%</div><div class="bar"><span style="width:${v}%"></span></div></div>`).join('')}
+function renderProfile(p,i){let b=[];if(i.intensity>=70)b.push('Explosif');if(i.activity>=70)b.push('Endurant / actif');if(i.defense>=70)b.push('Défenseur');if(i.contact>=70)b.push('Percuteur');if(i.fatigue)b.push('Fragile fin match');profile.innerHTML=`<div class="profile-box"><strong>${p.name}</strong><span>${p.desc}</span><div style="margin-top:10px">${b.map(x=>`<span class="badge">${x}</span>`).join('')||'<span class="badge">Profil à consolider</span>'}</div></div>`}
+function detailList(title, arr){
+  if(!arr || !arr.length) return '';
+  return `<div class="detail-card"><h4>${title}</h4><ul>${arr.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+}
+
+const individualTrainingDetails={
+activity:{
+  title:'Fiche individuelle — Joueur peu actif',
+  source:'FFR École de Rugby + Plan de formation du joueur + World Rugby Activate U15',
+  objective:'Augmenter la participation utile et rendre le joueur disponible autour du porteur de balle.',
+  organization:'Espace 15 m x 12 m. 3 attaquants contre 2 défenseurs. 4 séries de 2 minutes. Récupération 45 secondes.',
+  instructions:['Après chaque passe, le joueur doit se replacer pour offrir une solution.','Le joueur doit rester proche de l’action sans se cacher derrière un adversaire.','Le porteur doit toujours avoir au moins un soutien proche.'],
+  success:['Le joueur propose au moins 3 soutiens utiles par séquence.','Il reste en mouvement après chaque passe.','Il arrive dans un espace libre et visible pour le porteur.'],
+  levels:{n1:'Défense passive, espace réduit, objectif : oser se proposer.',n2:'Défense active modérée, obligation de se replacer après chaque passe.',n3:'Temps limité pour jouer, soutien demandé avant le contact.'},
+  safety:'Progression douce, valoriser la réussite, éviter les contacts forts au début.',
+  ppi:'Appuis rapides, déplacements latéraux, fentes avant, gainage court 15 s.',
+  dosage:'4 x 2 minutes, récupération 45 secondes.'
+},
+reading:{
+  title:'Fiche individuelle — Joueur actif mais inefficace',
+  source:'FFR Formation + Rugby Australia Skills + Rugby Coach Weekly',
+  objective:'Réduire les courses inutiles et améliorer la prise d’information avant la course.',
+  organization:'Espace 20 m x 15 m. Situation 3 contre 2. 10 passages courts avec arrêt image.',
+  instructions:['Avant de courir, regarder le défenseur et l’espace libre.','Annoncer son choix : fixer, passer, accélérer ou soutenir.','Courir uniquement si la course crée un avantage.'],
+  success:['Le joueur évite les sprints inutiles.','La course crée une solution pour le porteur.','Le joueur choisit un angle de course cohérent.'],
+  levels:{n1:'Arrêt image fréquent et choix guidé par l’enseignant.',n2:'Défense active et choix annoncé par le joueur.',n3:'Jeu en continuité sans arrêt, choix rapide sous pression.'},
+  safety:'Limiter la vitesse au début, privilégier la lecture et les déplacements contrôlés.',
+  ppi:'Réactivité visuelle, départ 5 m, freinage contrôlé, équilibre une jambe.',
+  dosage:'10 situations de 20 à 30 secondes.'
+},
+speed:{
+  title:'Fiche individuelle — Sprint peu utile / vitesse',
+  source:'World Rugby Activate U15 + Rugby Ready + Rugby vitesse',
+  objective:'Développer l’accélération utile dans une situation proche du jeu.',
+  organization:'Couloir 15 m x 8 m. 2 attaquants contre 1 défenseur. 4 séries de 4 passages.',
+  instructions:['Le joueur sprinte seulement si l’espace est ouvert ou si le soutien devient nécessaire.','Accélérer puis freiner sans perdre l’équilibre.','Finir l’action par une passe, un soutien ou un replacement.'],
+  success:['Départ explosif au bon moment.','Sprint utile et non automatique.','Freinage maîtrisé et disponibilité après l’effort.'],
+  levels:{n1:'Départ au signal, défenseur passif.',n2:'Départ selon lecture du défenseur.',n3:'Choix libre : accélérer, fixer ou transmettre.'},
+  safety:'Échauffement obligatoire, distances courtes, récupération suffisante entre les passages.',
+  ppi:'Montées de genoux, appuis rapides, accélération 5 m, freinage 3 appuis.',
+  dosage:'4 séries de 4 passages, récupération 30 à 45 secondes.'
+},
+defense:{
+  title:'Fiche individuelle — Replacement défensif faible',
+  source:'FFR Formation + Rugby Toolbox + Rugby Ready',
+  objective:'Améliorer le retour défensif et la reconstruction de la ligne après perte de balle.',
+  organization:'Espace 20 m x 15 m. 4 contre 4. 3 blocs de 3 minutes. Récupération 1 minute.',
+  instructions:['À la perte du ballon, revenir rapidement derrière la ligne du ballon.','Se placer entre l’adversaire et la cible.','Communiquer : “je monte”, “aide”, “glisse”.'],
+  success:['Retour rapide après perte de balle.','Posture défensive basse et équilibrée.','Le joueur ferme un espace libre ou ralentit l’attaque adverse.'],
+  levels:{n1:'Signal sonore clair pour déclencher le retour.',n2:'Transition déclenchée par perte réelle du ballon.',n3:'Jeu continu avec changement rapide attaque-défense.'},
+  safety:'Contrôler les vitesses de collision et privilégier l’évitement au début.',
+  ppi:'Sprint 8 m, changement de direction, gainage latéral 15 s, appuis réactifs.',
+  dosage:'3 x 3 minutes, récupération 1 minute.'
+},
+contact:{
+  title:'Fiche individuelle — Contact difficile',
+  source:'World Rugby Rugby Ready + World Rugby Activate U15',
+  objective:'Renforcer la sécurité, la stabilité et la confiance dans l’engagement physique.',
+  organization:'Zone 5 m x 5 m. 1 contre 1 contrôlé. 6 duels de 8 secondes. Intensité progressive.',
+  instructions:['Pousser sans projection.','Garder les appuis stables et le corps gainé.','Rester dans une opposition contrôlée, sans geste dangereux.'],
+  success:['Le joueur garde son équilibre.','Il engage l’épaule et le tronc de manière contrôlée.','Il accepte le duel sans se désorganiser.'],
+  levels:{n1:'Contact très léger avec bouclier ou opposition passive.',n2:'Duel contrôlé épaule contre épaule.',n3:'Contact + conservation + libération vers un soutien.'},
+  safety:'Arrêt immédiat en cas de douleur. Pas de contact violent. Rappel systématique des règles de sécurité.',
+  ppi:'Gainage frontal, pont latéral, squat contrôlé, équilibre sur une jambe, YWTL.',
+  dosage:'6 duels de 8 secondes, récupération 30 secondes.'
+},
+endurance:{
+  title:'Fiche individuelle — Baisse en fin de match',
+  source:'World Rugby Activate U15 + Rugby Ready Warm-up',
+  objective:'Maintenir une intensité stable pendant toute la séquence de jeu.',
+  organization:'Espace 20 m x 15 m. 3 contre 3. 2 blocs de 6 minutes. Format 20 s action / 20 s récupération active.',
+  instructions:['Rester disponible après un effort intense.','Se replacer rapidement après chaque action.','Conserver la qualité technique malgré la fatigue.'],
+  success:['Moins d’arrêt prolongé.','Replacement rapide en fin de séquence.','Qualité de passe et de soutien maintenue.'],
+  levels:{n1:'Durée courte, récupération longue.',n2:'20 s effort / 20 s récupération active.',n3:'Jeu continu avec contraintes de replacement.'},
+  safety:'Surveiller la fatigue, hydrater, adapter la charge aux élèves U15.',
+  ppi:'Course progressive, mobilité hanches/chevilles, gainage 20 s, respiration contrôlée.',
+  dosage:'2 blocs de 6 minutes, récupération 2 minutes entre les blocs.'
+}
+};
+function renderIndividualTrainingDetail(k){
+  const d = individualTrainingDetails[k];
+  if(!d){return ''}
+  return `<div class="individual-detail">
+    <h4>${d.title}</h4>
+    <p><strong>Objectif spécifique :</strong> ${d.objective}</p>
+    <div class="detail-grid">
+      <div class="detail-box"><strong>Organisation</strong>${d.organization}</div>
+      <div class="detail-box"><strong>PPI / préparation physique intégrée</strong>${d.ppi}</div>
+      <div class="detail-box"><strong>Dosage</strong>${d.dosage}</div>
+      <div class="detail-box"><strong>Sécurité U15</strong>${d.safety}</div>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-box"><strong>Consignes</strong><ul class="detail-list">${d.instructions.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div class="detail-box"><strong>Critères de réussite</strong><ul class="detail-list">${d.success.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    </div>
+    <strong style="display:block;margin-top:12px">Variables de niveau</strong>
+    <div class="levels">
+      <div class="level-card"><strong>N1</strong>${d.levels.n1}</div>
+      <div class="level-card"><strong>N2</strong>${d.levels.n2}</div>
+      <div class="level-card"><strong>N3</strong>${d.levels.n3}</div>
+    </div>
+    <span class="source-badge">Ressource : ${d.source}</span>
+  </div>`;
+}
+
+function renderDecisions(id,ps,i,mode){
+  document.getElementById(id).innerHTML = ps.map((k,n)=>{
+    const a = exercises[k];
+    return `<div class="decision">
+      <h3>${n===0?'Priorité haute':n===1?'Priorité moyenne':'Consolidation'} — ${a.title}</h3>
+      <p><strong>Objectif ${mode} :</strong> ${a.objective}</p>
+      <p><strong>Source :</strong> ${a.source}</p>
+      ${a.items.map(e=>`<div class="exercise"><div class="exercise-title">${e[0]}</div><p><strong>Situation rugby :</strong> ${e[1]}</p><p><strong>PPI :</strong> ${e[2]}</p><p><strong>Dosage :</strong> ${e[3]}</p></div>`).join('')}
+      ${mode === 'individuel' ? renderIndividualTrainingDetail(k) : ''}
+      ${mode === 'collectif' && a.video ? `<div class="video-box"><h4>Vidéo démonstration collective</h4><video controls preload="metadata"><source src="${a.video}" type="video/mp4">Votre navigateur ne supporte pas la lecture vidéo.</video><div class="video-note">Vidéo liée à l’axe d’entraînement collectif proposé automatiquement.</div></div>` : ''}
+    </div>`;
+  }).join('') + (i.fatigue?'<div class="warning-box">Chute d’intensité détectée : surveiller récupération et progressivité.</div>':'')
+}
+function analysePlayer(scroll=true){const i=calculateIndices(),p=getProfile(i),pr=getPriorities(i);renderScores(i);renderProfile(p,i);renderDecisions('decisions',pr,i,'individuel');if(scroll)decisions.scrollIntoView({behavior:'smooth'});return{indices:i,profile:p,priorities:pr}}
+function downloadCSVTemplate(){
+  const fields=['nom_joueur','match','classe','duree_observee','nombre_total_courses','courses_utiles','marche','trot','course_rapide','sprint','sprints_utiles','sprints_inutiles','retour_rapide','retour_moyen','retour_lent','nombre_contacts','contacts_gagnes','contacts_subis','intensite_debut','intensite_fin','chute_performance','commentaire_coach'];
+  const example=['Nom joueur','Match 5c5 - Terrain 1','U15 / 3AC','8 minutes',0,0,0,0,0,0,0,0,0,0,0,0,0,0,'moyenne','moyenne','non','Commentaire du coach'];
+  const csv = fields.join(',') + '\n' + example.map(v => '"' + String(v).replaceAll('"','""') + '"').join(',');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'modele_csv_observation_rugby_u15.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+function parseCSVLine(line){const out=[];let cur='',q=false;for(let i=0;i<line.length;i++){const ch=line[i];if(ch==='"')q=!q;else if(ch===','&&!q){out.push(cur);cur=''}else cur+=ch}out.push(cur);return out.map(x=>x.replace(/^"|"$/g,''))}
+function importCSVToGrid(e){const f=e.target.files&&e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{const lines=x.target.result.split(/\r?\n/).filter(Boolean);if(lines.length<2)return alert('CSV vide.');const headers=parseCSVLine(lines[0]);const values=parseCSVLine(lines[1]);const p={};headers.forEach((h,i)=>{const n=Number(values[i]);p[h]=isNaN(n)?values[i]:n});setOCRForm(p);applyOCRToGrid()};r.readAsText(f)}
+function addCurrentPlayerToTeam(){const a=analysePlayer(false),name=playerName.value.trim()||`Joueur ${teamPlayers.length+1}`;teamPlayers.push({id:Date.now(),name,raw:{...state},indices:a.indices,profile:a.profile.name,priorities:a.priorities,comment:coachComment.value});saveTeam();renderTeamTable();alert(name+' ajouté à l’équipe.')}
+function renderTeamTable(){if(!teamPlayers.length){teamTable.innerHTML='<p class="small">Aucun joueur ajouté.</p>';return}teamTable.innerHTML=`<table><thead><tr><th>Joueur</th><th>Profil</th><th>Activité</th><th>Intensité</th><th>Replacement</th><th>Contact</th><th>Action</th></tr></thead><tbody>${teamPlayers.map(p=>`<tr><td><strong>${p.name}</strong></td><td>${p.profile}</td><td>${p.indices.activity}%</td><td>${p.indices.intensity}%</td><td>${p.indices.defense}%</td><td>${p.indices.contact}%</td><td><button class="btn-danger" onclick="removePlayer(${p.id})">Supprimer</button></td></tr>`).join('')}</tbody></table>`}
+function removePlayer(id){teamPlayers=teamPlayers.filter(p=>p.id!==id);saveTeam();renderTeamTable();analyseTeam(false)}
+function getTeamPriorities(i){let p=[];if(i.activity<50)p.push('activity');if(i.defense<50)p.push('defense');if(i.sprintUtility<50)p.push('reading');if(i.intensity<50)p.push('speed');if(i.contact<50)p.push('contact');if(i.fatigue)p.push('endurance');p=[...new Set(p)];return p.length?p.slice(0,3):['reading','defense','activity']}
+function analyseTeam(scroll=true){if(!teamPlayers.length){teamScores.innerHTML='<p class="small">Ajoutez au moins un joueur.</p>';return}const i={activity:avg(teamPlayers.map(p=>p.indices.activity)),intensity:avg(teamPlayers.map(p=>p.indices.intensity)),sprintUtility:avg(teamPlayers.map(p=>p.indices.sprintUtility)),defense:avg(teamPlayers.map(p=>p.indices.defense)),contact:avg(teamPlayers.map(p=>p.indices.contact)),fatigue:teamPlayers.filter(p=>p.indices.fatigue).length>=Math.ceil(teamPlayers.length/3)};teamScores.innerHTML=[['Activité collective',i.activity],['Intensité collective',i.intensity],['Sprint utile collectif',i.sprintUtility],['Replacement collectif',i.defense],['Contact collectif',i.contact]].map(([n,v])=>`<div class="score-card"><div class="score-title">${n}<br><span class="small">${levelLabel(v)}</span></div><div class="score-value">${v}%</div><div class="bar"><span style="width:${v}%"></span></div></div>`).join('');let title='Équipe équilibrée en construction',desc='Le groupe présente des ressources variables.';if(i.defense<45){title='Équipe fragile en transition défensive';desc='Replacement collectif prioritaire.'}else if(i.activity<45){title='Équipe peu active';desc='Volume de courses utiles insuffisant.'}else if(i.contact<45){title='Équipe en difficulté au contact';desc='Stabilité, gainage et sécurité à renforcer.'}teamProfile.innerHTML=`<div class="profile-box"><strong>${title}</strong><span>${desc}</span><div style="margin-top:10px"><span class="badge">${teamPlayers.length} joueurs</span></div></div>`;const pr=getTeamPriorities(i);renderDecisions('teamDecisions',pr,i,'collectif');renderTeamCycle(pr);if(scroll)teamDecisions.scrollIntoView({behavior:'smooth'});return{teamIndices:i,priorities:pr}}
+function renderTeamCycle(pr){teamCycle.innerHTML=`<table><thead><tr><th>Phase</th><th>Objectif</th><th>Axe</th><th>Exercice</th><th>PPI</th></tr></thead><tbody>${['Séance 1-2','Séance 3-4','Séance 5-6','Séance 7-8'].map((ph,i)=>{const a=exercises[pr[Math.min(i,pr.length-1)]],e=a.items[0];return`<tr><td><strong>${ph}</strong></td><td>${i<1?'Diagnostic + sécurité':i<2?'Développement priorité haute':i<3?'Intégration collective':'Réévaluation match'}</td><td>${a.title}</td><td>${e[0]}</td><td>${e[2]}</td></tr>`}).join('')}</tbody></table>`}
+function generateReport(){const a=analysePlayer(false);report.value=`FICHE SYNTHÈSE INDIVIDUELLE — RUGBY U15\n\nNom : ${playerName.value||'Non renseigné'}\nClasse : ${className.value||'Non renseigné'}\nMatch : ${matchName.value||'Non renseigné'}\nDurée : ${duration.value||'Non renseigné'}\n\nINDICES\nActivité : ${a.indices.activity}%\nIntensité : ${a.indices.intensity}%\nSprint utile : ${a.indices.sprintUtility}%\nReplacement : ${a.indices.defense}%\nContact : ${a.indices.contact}%\n\nPROFIL\n${a.profile.name} — ${a.profile.desc}\n\nAXES\n${a.priorities.map((p,i)=>(i+1)+'. '+exercises[p].title).join('\n')}\n\nCommentaire : ${coachComment.value||'Aucun'}`}
+function generateTeamReport(){const r=analyseTeam(false);if(!r)return;teamReport.value=`BILAN COLLECTIF — RUGBY U15\n\nÉquipe : ${teamName.value||'Non renseigné'}\nMatch : ${teamMatch.value||'Non renseigné'}\nJoueurs : ${teamPlayers.length}\n\nINDICES COLLECTIFS\nActivité : ${r.teamIndices.activity}%\nIntensité : ${r.teamIndices.intensity}%\nSprint utile : ${r.teamIndices.sprintUtility}%\nReplacement : ${r.teamIndices.defense}%\nContact : ${r.teamIndices.contact}%\n\nAXES COLLECTIFS\n${r.priorities.map((p,i)=>(i+1)+'. '+exercises[p].title).join('\n')}\n\nJOUEURS\n${teamPlayers.map(p=>'- '+p.name+' : '+p.profile).join('\n')}`}
+function renderLibrary(){exerciseLibrary.innerHTML=Object.values(exercises).map(a=>`<div class="exercise"><div class="exercise-title">${a.title}</div><p><strong>Objectif :</strong> ${a.objective}</p><p><strong>Ressource :</strong> ${a.source}</p><div class="training-details">${detailList('Organisation', a.organisation)}${detailList('Consignes', a.consignes)}${detailList('Critères de réussite', a.criteres)}${detailList('Variables N1 / N2 / N3', a.variables)}</div>${a.securite?`<div class="security-box"><strong>Sécurité / adaptation U15 :</strong> ${a.securite}</div>`:''}${a.items.map(e=>`<div class="decision"><strong>${e[0]}</strong><p><strong>Rugby :</strong> ${e[1]}</p><p><strong>PPI :</strong> ${e[2]}</p><p><strong>Dosage :</strong> ${e[3]}</p></div>`).join('')}</div>`).join('')}
+function savePlayer(){localStorage.setItem('miniTechXVLastPlayer',JSON.stringify({state,info:{playerName:playerName.value,className:className.value,matchName:matchName.value,duration:duration.value,startIntensity:startIntensity.value,endIntensity:endIntensity.value,coachComment:coachComment.value}}));alert('Joueur sauvegardé.')}
+function loadLast(){const raw=localStorage.getItem('miniTechXVLastPlayer');if(!raw)return alert('Aucune sauvegarde.');const p=JSON.parse(raw);Object.keys(state).forEach(k=>state[k]=p.state[k]||0);const info=p.info||{};playerName.value=info.playerName||'';className.value=info.className||'';matchName.value=info.matchName||'';duration.value=info.duration||'';startIntensity.value=info.startIntensity||'moyenne';endIntensity.value=info.endIntensity||'moyenne';coachComment.value=info.coachComment||'';renderCounters();analysePlayer(false)}
+function saveTeam(){localStorage.setItem('miniTechXVTeam',JSON.stringify(teamPlayers))}function loadTeam(){const raw=localStorage.getItem('miniTechXVTeam');if(!raw)return alert('Aucune équipe sauvegardée.');teamPlayers=JSON.parse(raw);renderTeamTable();analyseTeam(false)}function clearTeam(){if(!confirm('Vider l’équipe ?'))return;teamPlayers=[];saveTeam();renderTeamTable();teamScores.innerHTML='';teamProfile.innerHTML='';teamDecisions.innerHTML='<p class="small">Cliquez sur analyser l’équipe.</p>';teamCycle.innerHTML='';teamReport.value=''}
+function resetAll(){if(!confirm('Réinitialiser la fiche individuelle ?'))return;Object.keys(state).forEach(k=>state[k]=0);document.querySelectorAll('#individual input[type=text],#individual textarea').forEach(x=>x.value='');startIntensity.value='moyenne';endIntensity.value='moyenne';renderCounters();analysePlayer(false)}
+function cleanCSVHeader(value){return String(value||'').trim().toLowerCase().replaceAll('é','e').replaceAll('è','e').replaceAll('ê','e').replaceAll('à','a').replaceAll('ù','u').replaceAll('ç','c').replaceAll(' ','_').replaceAll('-','_')}
+function readCSVLine2(line){const out=[];let cur='';let q=false;for(let i=0;i<line.length;i++){const ch=line[i];const nx=line[i+1];if(ch==='"'&&q&&nx==='"'){cur+='"';i++}else if(ch==='"'){q=!q}else if((ch===','||ch===';')&&!q){out.push(cur.trim());cur=''}else{cur+=ch}}out.push(cur.trim());return out}
+function numberCSV(value){const x=Number(String(value||'0').replace(',','.'));return Number.isFinite(x)?Math.max(0,Math.round(x)):0}
+function getCSV(row,names){for(let i=0;i<names.length;i++){const k=cleanCSVHeader(names[i]);if(row[k]!==undefined&&row[k]!==null&&row[k]!==''){return row[k]}}return ''}
+function setCSVState(key,value){if(Object.prototype.hasOwnProperty.call(state,key)){state[key]=numberCSV(value)}}
+function applyCSVObjectToGrid2(row){playerName.value=getCSV(row,['nom_joueur','playerName','joueur','nom']);matchName.value=getCSV(row,['match','matchName']);className.value=getCSV(row,['classe','className','groupe']);duration.value=getCSV(row,['duree_observee','duration','duree observee']);if(typeof coachComment!=='undefined'){coachComment.value=getCSV(row,['commentaire_coach','commentaire','coachComment'])}setCSVState('totalRuns',getCSV(row,['nombre_total_courses','totalRuns']));setCSVState('usefulRuns',getCSV(row,['courses_utiles','usefulRuns']));setCSVState('walk',getCSV(row,['marche','walk']));setCSVState('trot',getCSV(row,['trot']));setCSVState('fastRun',getCSV(row,['course_rapide','fastRun']));setCSVState('sprint',getCSV(row,['sprint']));setCSVState('usefulSprint',getCSV(row,['sprints_utiles','usefulSprint']));setCSVState('uselessSprint',getCSV(row,['sprints_inutiles','uselessSprint']));setCSVState('rapidReturn',getCSV(row,['retour_rapide','rapidReturn']));setCSVState('mediumReturn',getCSV(row,['retour_moyen','mediumReturn']));setCSVState('slowReturn',getCSV(row,['retour_lent','slowReturn']));setCSVState('contacts',getCSV(row,['nombre_contacts','contacts']));setCSVState('contactsWon',getCSV(row,['contacts_gagnes','contactsWon']));setCSVState('contactsLost',getCSV(row,['contacts_subis','contactsLost']));setCSVState('supportRuns',getCSV(row,['courses_soutien','supportRuns']));setCSVState('inactivity',getCSV(row,['inactivite','inactivity']));const sd=cleanCSVHeader(getCSV(row,['intensite_debut','startIntensity'])||'moyenne');const sf=cleanCSVHeader(getCSV(row,['intensite_fin','endIntensity'])||'moyenne');if(['forte','moyenne','faible'].includes(sd)){startIntensity.value=sd}if(['forte','moyenne','faible'].includes(sf)){endIntensity.value=sf}Object.keys(labels).forEach(k=>{const el=document.getElementById('value-'+k);if(el){el.textContent=state[k]}});analysePlayer(false)}
+function reportCSVTextToGrid(){
+  const box=document.getElementById('csvTextInput');
+  const txt=String(box&&box.value||'').trim();
+  if(!txt){alert('Collez le contenu CSV ou importez un fichier CSV.');return}
+
+  const lines=txt.split(String.fromCharCode(10)).map(l=>l.trim()).filter(l=>l);
+  if(lines.length<1){alert('CSV vide.');return}
+
+  const expectedHeaders=['nom_joueur','match','classe','duree_observee','nombre_total_courses','courses_utiles','marche','trot','course_rapide','sprint','sprints_utiles','sprints_inutiles','retour_rapide','retour_moyen','retour_lent','nombre_contacts','contacts_gagnes','contacts_subis','intensite_debut','intensite_fin','chute_performance','commentaire_coach'];
+  const firstLine=readCSVLine2(lines[0]);
+  const firstKey=cleanCSVHeader(firstLine[0]);
+  const hasHeaders=expectedHeaders.includes(firstKey)||firstKey==='playername'||firstKey==='player_name';
+
+  let headers;
+  let data;
+  if(hasHeaders){
+    if(lines.length<2){alert('Le CSV contient les en-têtes mais aucune ligne joueur.');return}
+    headers=firstLine.map(cleanCSVHeader);
+    data=readCSVLine2(lines[1]);
+  }else{
+    headers=expectedHeaders;
+    data=firstLine;
+  }
+
+  const row={};
+  headers.forEach((h,i)=>row[h]=data[i]||'');
+  applyCSVObjectToGrid2(row);
+  alert('CSV reporté dans la grille numérique.');
+}
+function importCSVToGrid(e){const file=e.target.files&&e.target.files[0];if(!file)return;if(!file.name.toLowerCase().endsWith('.csv')){alert('Importer uniquement un fichier CSV.');return}const reader=new FileReader();reader.onload=function(evt){const text=String(evt.target.result||'').trim();const box=document.getElementById('csvTextInput');if(box){box.value=text}if(!text){alert('Fichier CSV vide ou illisible. Collez le CSV en texte.');return}reportCSVTextToGrid()};reader.onerror=function(){alert('Le fichier CSV n’est pas lisible. Collez son contenu dans la zone texte puis cliquez sur Reporter dans la grille.')};reader.readAsText(file,'UTF-8')}
+function boot(){renderCounters();renderLibrary();renderTeamTable();analysePlayer(false)}
+boot();
+</script>
+</body>
+</html>
